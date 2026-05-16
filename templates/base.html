@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recipe App</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f8;
+            color: #333;
+        }
+
+        .container {
+            width: 900px;
+            margin: 30px auto;
+        }
+
+        .menu {
+            margin-bottom: 25px;
+            padding: 18px 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #2c6e49;
+            font-weight: bold;
+        }
+
+        .menu a:hover {
+            color: #1f4f35;
+        }
+
+        .user-box {
+            margin-left: auto;
+            padding: 8px 12px;
+            background-color: #eaf4ee;
+            border: 1px solid #cfe6d8;
+            border-radius: 20px;
+            color: #2c6e49;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .box {
+            background-color: white;
+            padding: 22px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        h1, h2, h3 {
+            color: #222;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            padding: 10px 18px;
+            background-color: #2c6e49;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1f4f35;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        .recipe-link {
+            text-decoration: none;
+            color: #2c6e49;
+        }
+
+        .recipe-link:hover {
+            color: #1f4f35;
+        }
+
+        .small-text {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .action-links a {
+            margin-right: 12px;
+            text-decoration: none;
+            color: #b02a37;
+            font-weight: bold;
+        }
+
+        .action-links a:hover {
+            color: #7a1c25;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="menu">
+            <a href="{% url 'recipe_list' %}">All Recipes</a>
+
+            {% if user.is_authenticated %}
+                <a href="{% url 'add_recipe' %}">Add Recipe</a>
+                <a href="{% url 'my_recipes' %}">My Recipes</a>
+                <a href="{% url 'logout' %}">Logout</a>
+
+                <span class="user-box">
+                    👤 Logged in as {{ user.username }}
+                </span>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'register' %}">Register</a>
+            {% endif %}
+        </div>
+
+        {% block content %}
+        {% endblock %}
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Edit Recipe</h1>
+
+<div class="box">
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Title</label>
+        <input type="text" name="title" value="{{ recipe.title }}">
+
+        <label>Description / Steps</label>
+        <textarea name="description" rows="6">{{ recipe.description }}</textarea>
+
+        <label>Ingredients</label>
+        <textarea name="ingredients" rows="6">{{ recipe.ingredients }}</textarea>
+
+        <button type="submit">Update Recipe</button>
+    </form>
+</div>
+
+{% endblock %}

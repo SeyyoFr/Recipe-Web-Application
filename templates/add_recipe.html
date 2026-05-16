@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Add Recipe</h1>
+
+<div class="box">
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Title</label>
+        <input type="text" name="title">
+
+        <label>Description / Steps</label>
+        <textarea name="description" rows="6"></textarea>
+
+        <label>Ingredients</label>
+        <textarea name="ingredients" rows="6"></textarea>
+
+        <button type="submit">Save Recipe</button>
+    </form>
+</div>
+
+{% endblock %}

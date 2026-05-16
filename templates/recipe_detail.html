@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="box">
+    <h1>{{ recipe.title }}</h1>
+
+    <p><b>By:</b> {{ recipe.author.username }}</p>
+
+    <h3>Description / Steps</h3>
+    <p>{{ recipe.description }}</p>
+
+    <h3>Ingredients</h3>
+    <p>{{ recipe.ingredients }}</p>
+
+    {% if user == recipe.author %}
+        <p>
+            <a href="{% url 'edit_recipe' recipe.id %}">Edit</a>
+            <a href="{% url 'delete_recipe' recipe.id %}">Delete</a>
+        </p>
+    {% endif %}
+</div>
+
+<div class="box">
+    <h2>Comments</h2>
+
+    {% if user.is_authenticated %}
+        <form method="POST" action="{% url 'add_comment' recipe.id %}">
+            {% csrf_token %}
+
+            <textarea name="text" rows="4" placeholder="Write a comment"></textarea>
+
+            <button type="submit">Add Comment</button>
+        </form>
+    {% else %}
+        <p>You need to login to add a comment.</p>
+    {% endif %}
+
+    {% for comment in comments %}
+        <div class="box">
+            <p>{{ comment.text }}</p>
+            <p>By {{ comment.author.username }} - {{ comment.created_at }}</p>
+        </div>
+    {% empty %}
+        <p>No comments yet.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}
